@@ -1,0 +1,58 @@
+S3 Overview
+  Object based storage
+  Consists of Key (name), Value (data), VersionID, Metadata
+  Object based storage only for files, not suitable for OS installs
+  Files are 0 - 5TB
+  Unlimited storage
+  Files are stored in Buckets
+  S3 is universal namespace, bucket names must be unique e.g. https://s3-us-west-1.amazonaws.com/{bucketname}
+  Read after Write consistency for PUTS
+  Eventual Consistency for overwrite PUTS (updates) or DELETES, can take some time
+S3 Storage Tiers
+  S3: 11 9's of durability, immediately available, frequent access
+  S3-IA: 11 9's of durability, immediately available, infrequent access
+  S3 RRS: 99.99% durability, easily reproducible objects i.e. thumbnails
+  Glaicer: Archived data, takes 3-5 hours for access
+Versioning
+  Stores all versions of objects, even if you delete object
+  Once enabled, cannot be disabled, can only be suspended
+  Integrates with lifecycle rules
+  MFA Delete can be used to provide additional security layer
+  Cross region replication requires versioning enabled on source bucket
+Lifecylce Management
+  Used with current versions or previous versions
+  S3 -> S3-IA transition can be done with minimum 128KB data 30 days after creation
+  S3-IA -> Glacier transition can be done 30 days after S3-IA 
+  Permanently delete objects
+CloudFront
+  Edge Location - Where content will be cached, about 50 globally currently. Both READ/WRITE supported (store objects)
+  Origin - Origin of all files that CDN will distribute. Can be either S3, EC2, Elastic Load Balancer, or Route53
+  Distribution - Name given to CDN which consists of collection of Edge Locations. Can be either Web Distribution or RTMP (flash files)
+  Objects are cached for life of the TTL (Time to Live)
+  Clearing cached objects from Edge Locations incur a charge
+Buckets
+  All newly created Buckets are PRIVATE
+  Can setup Bucket Policies or Access Control Lists (ACL) to control buckets
+  S3 Buckets can be configured to create access logs which log all requests
+Enrcyption
+  In Transit done via SSL/TLS
+  At Rest done via Server Side Encryption: S3 Managed Keys (SSE-S3), AWS Key Management Service (SSE-KMS), Customer Provided Key (SSE-C)
+  Client Side Enrcyption
+Gateways
+  File Gateway - For flat files only stored directly to S3
+  Stored Volume Gateway - Entire dataset is stored in onsite datacenter and asynchronously backed to S3
+  Cached Volume Gateway - Entire dataset is stored on S3, only most frequently accessed data cached onsite
+  Gateway Virtual Tape Library (VTL) - Used for backups, uses apps like NetBackup, Backup Exec, Veam
+Snowball
+  Import/Export to S3
+  Snowball: 50 - 80TB Storage
+  Snowball Edge: Storage + Compute capabilities, can run lambda functions, like a mini-datacenter
+  Snowmobile: Semitrailer truck with 100PB storage, only available in U.S. as of 2016
+Other
+  S3 Transfer Acceleration speeds up upload speeds in far away regions
+  Can host static websites, serverless, very cheap, but only static content cannot host dynamic sites
+  Write to S3 HTTP 200 code for successful write
+  Use multipart upload feature to increase upload speeds
+  Review S3 FAQ
+
+
