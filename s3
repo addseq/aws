@@ -9,10 +9,10 @@ S3 Overview
   Read after Write consistency for PUTS
   Eventual Consistency for overwrite PUTS (updates) or DELETES, can take some time
 S3 Storage Tiers
-  S3: 11 9's of durability, immediately available, frequent access
-  S3-IA: 11 9's of durability, immediately available, infrequent access
-  S3 RRS: 99.99% durability, easily reproducible objects i.e. thumbnails
-  Glaicer: Archived data, takes 3-5 hours for access
+  S3: 11 9's of durability, 99.99% availability, immediately available, frequent access
+  S3-IA: 11 9's of durability, 99.9% availability, immediately available, infrequent access
+  S3 RRS: 99.99% durability, 99.99% availability, easily reproducible objects i.e. thumbnails
+  Glacier: 11 9's of durability, 99.99% availability, archived data, takes 3-5 hours for access. 
 Versioning
   Stores all versions of objects, even if you delete object
   Once enabled, cannot be disabled, can only be suspended
@@ -54,5 +54,3 @@ Other
   Write to S3 HTTP 200 code for successful write
   Use multipart upload feature to increase upload speeds
   Review S3 FAQ
-
-
