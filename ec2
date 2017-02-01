@@ -1,0 +1,36 @@
+Overview
+  Resizable Compute Capacity
+Pricing Models
+  On Demand
+    Pay fixed rate per hour with no upfront costs or commitment
+    Low cost and flexible
+    Apps with short term, spiky, or unpredictable workloads that cannot be interrupted
+    Apps being developed or tested for first time
+  Reserved
+    Provide capacity reservation, offer significant discount on hourly charge for instance. 1 or 3 Yr terms
+    Apps with steady state or predictable usage that require reserved capacity
+    Larger upfront payments reduces total computing costs further
+  Spot
+    Bid for price on excess compute capacity
+    Apps that have flexible start and end times
+    Apps that are only feasible at very low compute prices
+    Users with urgent computing needs for large amounts of additional capacity
+  Dedicated Hosts
+    Physical EC2 server. Reduce costs by allowing use of existing server-bound software licenses.
+    Useful for regulatory requirements that may not support multi-tenant virtualisation
+    Great for licensing which does not support multi-tenancy or cloud deployments
+    Purchased hourly on-demand or upfront for 70% off
+    If spot instance terminated (Spot Price > Bid Price), you will not be charged for partial hour of usage.
+    However if you terminate the instance yourself, you will be charged for partial hours
+Instance Types
+  D2 - Density storage, fileservers/data warehouse/hadoop
+  R4 - Memory optimized, memory intensive apps/dbs
+  M4 - General purpose, app servers
+  C4 - Compute optimized, cpu intensive apps/dbs
+  G2 - Graphics intensive, video encoding/3d app streaming
+  I2 - IOPS high speed storage, nosql dbs/data warehousing
+  F1 - Field programmable gate array (FPGA), hardware acceleration for code
+  T2 - Lowest cost & cheap general purpose, web servers/small dbs
+  P2 - Graphics/general purpose GPU, maching learning/bit coin mining
+  X1 - Extreme Memory optimized, apache spark
+  
