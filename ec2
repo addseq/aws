@@ -1,6 +1,6 @@
-Overview
+EC2 Overview
   Resizable Compute Capacity
-Pricing Models
+EC2 Pricing Models
   On Demand
     Pay fixed rate per hour with no upfront costs or commitment
     Low cost and flexible
@@ -15,14 +15,14 @@ Pricing Models
     Apps that have flexible start and end times
     Apps that are only feasible at very low compute prices
     Users with urgent computing needs for large amounts of additional capacity
+    If spot instance terminated by AWS (Spot Price > Bid Price), you will not be charged for partial hour of usage.
+    However if you terminate the instance yourself, you will be charged for partial hours
   Dedicated Hosts
     Physical EC2 server. Reduce costs by allowing use of existing server-bound software licenses.
     Useful for regulatory requirements that may not support multi-tenant virtualisation
     Great for licensing which does not support multi-tenancy or cloud deployments
     Purchased hourly on-demand or upfront for 70% off
-    If spot instance terminated (Spot Price > Bid Price), you will not be charged for partial hour of usage.
-    However if you terminate the instance yourself, you will be charged for partial hours
-Instance Types
+EC2 Instance Types
   D2 - Density storage, fileservers/data warehouse/hadoop
   R4 - Memory optimized, memory intensive apps/dbs
   M4 - General purpose, app servers
@@ -33,4 +33,16 @@ Instance Types
   T2 - Lowest cost & cheap general purpose, web servers/small dbs
   P2 - Graphics/general purpose GPU, maching learning/bit coin mining
   X1 - Extreme Memory optimized, apache spark
+EBS
+  Create storage volumes and attach to EC2
+  Can create FS on top of these volumes, run a database, or use in any other way as a block device
+  Placed in specific availability zones and automatically replicated
+EBS Volume Types
+  SSD General Purpose (GP2) - Balance price and performance. 3 IOPS per GB up to 10K IOPS and ability to burst up to 3K IOPS under 1 Gib
+  SSD Provisioned IOPS (IO1) - Use if need > 10K IOPS, up to 20K IOPS. Designed for I/O intensive apps such as NoSQL or large RDBs
+  HDD Throughput Optimized (ST1) - Use for frequently accessed worklads. Big data, data warehouse, log process, cannot be a boot volume
+  HDD Cold (SC1) - Lowest cost storage for infrequent workloads such as file server
+  HDD Magnetic (Standard) - Lowest cost per GB of all EBS that is bootable. Cheap, infrequently acccessed workloads with lowest storage cost
+  You cannot mount 1 EBS volume to multiple EC2 instances, instead use EFS
   
+
