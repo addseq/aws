@@ -42,7 +42,16 @@ EBS Volume Types
   SSD Provisioned IOPS (IO1) - Use if need > 10K IOPS, up to 20K IOPS. Designed for I/O intensive apps such as NoSQL or large RDBs
   HDD Throughput Optimized (ST1) - Use for frequently accessed worklads. Big data, data warehouse, log process, cannot be a boot volume
   HDD Cold (SC1) - Lowest cost storage for infrequent workloads such as file server
-  HDD Magnetic (Standard) - Lowest cost per GB of all EBS that is bootable. Cheap, infrequently acccessed workloads with lowest storage cost
+  HDD Magnetic (Standard) - Lowest cost per GB of bootable EBS types. Cheap, infrequently acccessed workloads with lowest storage cost
   You cannot mount 1 EBS volume to multiple EC2 instances, instead use EFS
+Security Groups Basics
+  Virtual firewall. 1 instance can have multiple security groups
+  All inbound traffic is blocked by default
+  All outbound traffic is allowed
+  Changes to Security Groups take effect immediately
+  Can have any number of EC2 instances within a security group
+  Can have multiple security groups attached to EC2 instances
+  Security Groups are STATEFUL - If you create inbound rule allowing traffic in, that traffic is auto-allowed back out again
+  Cannot block specific IP addresses using Security Groups, instead use Network Access Control Lists
+  Can specify allow rules, but not deny rules
   
-
