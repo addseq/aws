@@ -54,11 +54,13 @@ Security Groups Basics
   Security Groups are STATEFUL - If you create inbound rule allowing traffic in, that traffic is auto-allowed back out again
   Cannot block specific IP addresses using Security Groups, instead use Network Access Control Lists
   Can specify allow rules, but not deny rules
-Volumes & Snapshots
+Volumes vs Snapshots
   Volumes exist on EBS as Virtual Hard Disks
-  Snapshots exist on S3
-  Snapshots are point in time copies of Volumes
+  Snapshots exist on S3, and are point in time copies of Volumes
   Snapshots are incremental, this means that only the blocks that have changed since your last snapshot are moved to S3
+  Snapshots of encrypted volumes are encrypted automatically
+  Volumes restored from encrypted snapshots are encrypted automatically
+  You can share snapshots, but only if they are unencrpyted. Can be shared with other AWS accounts or made public.
   RAID = Redundant Array of Independent Disks
   RAID 0 - Striped, No Redundancy, Good Performance
   RAID 1 - Mirrored, Redundancy
@@ -70,9 +72,6 @@ Volumes & Snapshots
     be a problem due to interdependencies of the array.
     Solution - Take an application consistent snapshot. Stop the application from writing to disk. Flush all caches to disk.
     How can we do this? - Freeze the file system. Unmount the RAID array. Shutting down associated EC2 instance.
-  Snapshots of encrypted volumes are encrypted automatically
-  Volumes restored from encrypted snapshots are encrypted automatically
-  You can share snapshots, but only if they are unencrpyted. Can be shared with other AWS accounts or made public.
 AMI
   Can select an AMI based on:
     Region
@@ -86,6 +85,7 @@ AMI
       All AMIs are categorized as either backed by Amazon EBS or backed by instance store
       For EBS Volumes: The root device for an instance launched from AMI is an Amazon EBS volume created from EBS snapshot
       For Instance Store Volumes: The root device for an instance launched from AMI is an instance store volume created from S3 template
+EBS vs Instance Store
   Instance Store Volumes are sometimes called Ephemeral Storage
   Instance Store Volumes cannot be stopped. If the underlying host fails, you will lose your data
   EBS backed instances can be stopped. You will not lose the data on this instance if it is stopped
