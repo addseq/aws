@@ -37,13 +37,14 @@ EBS
   Create storage volumes and attach to EC2
   Can create FS on top of these volumes, run a database, or use in any other way as a block device
   Placed in specific availability zones and automatically replicated
+  EBS volumes only persist if instructed when created, once an EC2 instance is terminated
 EBS Volume Types
   SSD General Purpose (GP2) - Balance price and performance. 3 IOPS per GB up to 10K IOPS and ability to burst up to 3K IOPS under 1 Gib
   SSD Provisioned IOPS (IO1) - Use if need > 10K IOPS, up to 20K IOPS. Designed for I/O intensive apps such as NoSQL or large RDBs
   HDD Throughput Optimized (ST1) - Use for frequently accessed worklads. Big data, data warehouse, log process, cannot be a boot volume
   HDD Cold (SC1) - Lowest cost storage for infrequent workloads such as file server
   HDD Magnetic (Standard) - Lowest cost per GB of bootable EBS types. Cheap, infrequently acccessed workloads with lowest storage cost
-  You cannot mount 1 EBS volume to multiple EC2 instances, instead use EFS
+  You CANNOT mount 1 EBS volume to multiple EC2 instances, instead use EFS
 Security Groups Basics
   Virtual firewall. 1 instance can have multiple security groups
   All inbound traffic is blocked by default
@@ -57,7 +58,7 @@ Security Groups Basics
 Volumes vs Snapshots
   Volumes exist on EBS as Virtual Hard Disks
   Snapshots exist on S3, and are point in time copies of Volumes
-  Snapshots are incremental, this means that only the blocks that have changed since your last snapshot are moved to S3
+  Snapshots are backed incrementally, this means that only the blocks that have changed since your last snapshot are moved to S3
   Snapshots of encrypted volumes are encrypted automatically
   Volumes restored from encrypted snapshots are encrypted automatically
   You can share snapshots, but only if they are unencrpyted. Can be shared with other AWS accounts or made public.
@@ -85,6 +86,8 @@ AMI
       All AMIs are categorized as either backed by Amazon EBS or backed by instance store
       For EBS Volumes: The root device for an instance launched from AMI is an Amazon EBS volume created from EBS snapshot
       For Instance Store Volumes: The root device for an instance launched from AMI is an instance store volume created from S3 template
+    You cannot delete a snapshot of an EBS Volume that is used as the root device of a registered AMI, must deregister the AMI first.
+      http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-deleting-snapshot.html
 EBS vs Instance Store
   Instance Store Volumes are sometimes called Ephemeral Storage
   Instance Store Volumes cannot be stopped. If the underlying host fails, you will lose your data
@@ -109,7 +112,7 @@ Roles
 EC2 Placement Groups
   A logical grouping of instances within a single Availability Zone. Using placement groups enables applications to participate in low 
   latency, 10 Gbps network. Placement groups are recommended for apps that benefit from low latency, high network throughput, or both.
-  A placement group can't span multiple Availability Zones.
+  A placement group cannot be deployed across multiple Availability Zones.
   The name you specify for a placement group must be unique within your AWS account.
   Only certain types can be launched in placement group (Compute Optimized, GPU, Memory Optimized, Storage Optimized).
   AWS recommend homogenous instances within placement groups.
@@ -140,3 +143,5 @@ Lambda - Serverless Compute
     Number of requests - First 1 million requests are free. $0.20 per 1 million requests thereafter.
     Duration - Calculated from the time your code begins executing until it returns or otherwise terminates, rounded up to the nearest
     100ms. The price depends on the amount of memory you allocate to your function. You are charged $0.00001667 for every GB-second used.
+CLI
+  ec2-create-snapshot: Creates a new snapshot from command line
