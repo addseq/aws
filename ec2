@@ -22,8 +22,8 @@ EC2 Pricing Models
     Useful for regulatory requirements that may not support multi-tenant virtualisation
     Great for licensing which does not support multi-tenancy or cloud deployments
     Purchased hourly on-demand or upfront for 70% off
-EC2 Instance Types
-  D2 - Density storage, fileservers/data warehouse/hadoop
+EC2 Instance Types - Dr McGiftPx
+  D2 - Dense storage, fileservers/data warehouse/hadoop
   R4 - Memory optimized, memory intensive apps/dbs
   M4 - General purpose, app servers
   C4 - Compute optimized, cpu intensive apps/dbs
@@ -31,8 +31,8 @@ EC2 Instance Types
   I2 - IOPS high speed storage, nosql dbs/data warehousing
   F1 - Field programmable gate array (FPGA), hardware acceleration for code
   T2 - Lowest cost & cheap general purpose, web servers/small dbs
-  P2 - Graphics/general purpose GPU, maching learning/bit coin mining
-  X1 - Extreme Memory optimized, apache spark
+  P2 - Graphics/general purpose GPU, maching learning/bitcoin mining
+  X1 - Extreme Memory optimized, apache spark/SAP hana
 EBS
   Create storage volumes and attach to EC2
   Can create FS on top of these volumes, run a database, or use in any other way as a block device
@@ -71,10 +71,10 @@ Volumes vs Snapshots
     This tends not to matter on a single volume, however using multiple volumes in a RAID array, this can
     be a problem due to interdependencies of the array.
     Solution - Take an application consistent snapshot. Stop the application from writing to disk. Flush all caches to disk.
-    How can we do this? - Freeze the file system. Unmount the RAID array. Shutting down associated EC2 instance.
-AMI
+    How can we do this? (3 Options) - 1. Freeze the file system. 2. Unmount the RAID array. 3. Shutting down associated EC2 instance.
+AMI 
   Can select an AMI based on:
-    Region
+    Region (Can only launch AMI from region it is stored, but can copy to other regions)
     Operating System
     Architecture (32 or 64 bit)
     Launch Permissions
@@ -96,6 +96,7 @@ Elastic Load Balancers
   Health Checks
   Have their own DNS name. You are never given an IP address
 Cloudwatch
+  For performance monitoring. (Cloutrail for auditing) Standard monitoring is every 5 min, Detailed is every 1 min.
   Dashboards - Creates awesome dashboards to see what's happening with AWS envinronment
   Alarms - Allows you set Alarms that notify you when particular thesholds are hit
   Events - Cloudwatch Events helps you to respond to state changes in your AWS resources
@@ -115,6 +116,10 @@ EC2 Placement Groups
   You can't merge placement groups.
   You can't move an existing instance into a placement group. You can create an AMI from your existing instance, and then launch a new
   instance from the AMI into the placement group.
+Instance MetaData
+  Used to get information about an instance, such as public ip
+  curl http://169.254.169.254/latest/meta-data
+  No such thing as user-data for an instance
 EFS
   Elastic File System is a file storage service for EC2 instances. Amazon EFS is easy to use and provides a simple interface that allows
   you to create and configure file systems quickly and easily. With Amazon EFS, storage capacity is elastic, growing and shrinking as you
@@ -125,7 +130,7 @@ EFS
   Can support thousands of concurrent NFS connections.
   Data is stored across multiple AZ's within a region.
   Read after Write consistency.
-Lambda
+Lambda - Serverless Compute
   AWS Lambda is a compute service where you can upload your code and create a Lambda function. AWS Lambda takes care of provisioning and
   managing the servers that you use to run the code. You don't have to worry about OS, patching, scaling, etc. You can use Lambda-
   As an event-driven compute service where AWS Lambda runs your code in response to events. These events could be changes to data in an 
