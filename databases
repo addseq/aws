@@ -1,0 +1,32 @@
+Relational DB Types
+  SQL Server
+  Oracle
+  MySQL Server
+  PostgreSQL
+  AWS Aurora
+  AWS MariaDB
+NoSQL DB Types
+  CouchDB
+  MongoDB
+  AWS DynamoDB - Document orientated
+  Database
+    Collection - Table
+    Document - Row
+    Key Value Pairs - Fields
+OLTP vs OLAP
+  Online Transaction Processing (OLTP) differs from Online Analytics Processing (OLAP) in terms of the types of queries run.
+  OLTP Example: Order #212, pull up row of data with name, date, address, etc. Transaction based
+  OLAP Example: Net profit for EMEA and Pacific for product. Invovles multiple reads/joins, copy of DB and use columnar storage for speed
+  AWS RedShift - OLAP
+AWS ElastiCache
+  Web service that makes it easy to deploy, operate, and scale an in-memory cache in the cloud
+  Improves performance of web applications by allowing information retrieval from fast, managed, in-memory caches, instead of relying on 
+  slower disk-based DBs.
+  1. Memcached
+  2. Redis
+DMS - Database Migration Services
+  Allows you to migrate production DB to AWS, AWS manages all the complexities such as transformations, compression, parallel transfers
+  Enables auto data replication from source to target
+  Move legacy DBs like Oracle to open source SQL DBs like MySQL
+  
+  
